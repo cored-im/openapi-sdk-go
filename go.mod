@@ -1,0 +1,8 @@
+module github.com/cored-im/openapi-sdk-go
+
+go 1.12
+
+require (
+	github.com/gogo/protobuf v1.3.1
+	github.com/gorilla/websocket v1.5.0
+)

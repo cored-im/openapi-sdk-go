@@ -68,7 +68,7 @@ client := cosdk.NewClient(
     "https://your-backend-url.com",
     "your-app-id",
     "your-app-secret",
-    cosdk.WithLogLevel(cocore.LoggerLevelDebug), // Log level (default: Info)
+    cosdk.WithLogLevel(cocore.LoggerLevelDebug),            // Log level (default: Info)
     cosdk.WithRequestTimeout(30 * time.Second),             // Request timeout (default: 60s)
     cosdk.WithEnableEncryption(false),                      // Enable request encryption (default: true)
 )

@@ -5,7 +5,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/cored-im/openapi-sdk-go)](https://goreportcard.com/report/github.com/cored-im/openapi-sdk-go)
 [![License](https://img.shields.io/github/license/cored-im/openapi-sdk-go)](LICENSE)
 
-[English](README_en.md) | 中文
+[English](README.md) | 中文
 
 Cored 是一个安全、可自托管的团队协作平台，集成了即时通讯、组织架构、音视频会议和文件存储等功能。
 

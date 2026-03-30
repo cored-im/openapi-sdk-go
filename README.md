@@ -1,6 +1,7 @@
 # Cored IM OpenAPI SDK - Golang
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/cored-im/openapi-sdk-go.svg)](https://pkg.go.dev/github.com/cored-im/openapi-sdk-go)
+[![Go Version](https://img.shields.io/github/v/tag/cored-im/openapi-sdk-go)](https://github.com/cored-im/openapi-sdk-go/tags)
 [![Go](https://github.com/cored-im/openapi-sdk-go/actions/workflows/go.yaml/badge.svg)](https://github.com/cored-im/openapi-sdk-go/actions/workflows/go.yaml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cored-im/openapi-sdk-go)](https://goreportcard.com/report/github.com/cored-im/openapi-sdk-go)
 [![License](https://img.shields.io/github/license/cored-im/openapi-sdk-go)](LICENSE)

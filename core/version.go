@@ -4,7 +4,7 @@
 package cocore
 
 // SDK version
-const Version = "0.28.101"
+const Version = "0.28.102"
 
 // User-Agent
 const UserAgent = "cored-openapi-sdk-go/" + Version

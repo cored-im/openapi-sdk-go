@@ -1,4 +1,4 @@
-# Cored IM OpenAPI SDK
+# Cored IM OpenAPI SDK - Golang
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/cored-im/openapi-sdk-go.svg)](https://pkg.go.dev/github.com/cored-im/openapi-sdk-go)
 [![Go](https://github.com/cored-im/openapi-sdk-go/actions/workflows/go.yaml/badge.svg)](https://github.com/cored-im/openapi-sdk-go/actions/workflows/go.yaml)
@@ -10,10 +10,6 @@ English | [中文](README_zh.md)
 Cored is a secure, self-hosted productivity platform for teams, integrating instant messaging, organizational structures, video conferencing, and file storage.
 
 This is the official Go SDK for Cored server, used to interact with the Cored server via OpenAPI. You need to deploy the Cored server before using this SDK. See the [Quick Deploy Guide](https://coredim.com/docs/admin/install/quick-install) for setup instructions.
-
-## Requirements
-
-- Go 1.12 or later
 
 ## Installation
 
@@ -35,7 +31,7 @@ import (
 )
 
 func main() {
-    client := cosdk.NewClient("http://localhost:11000", "your-app-id", "your-app-secret")
+    client := cosdk.NewClient("https://your-backend-url.com", "your-app-id", "your-app-secret")
     defer client.Close()
 
     // Optional: preheat fetches access token and syncs server time upfront,
@@ -43,28 +39,72 @@ func main() {
     _ = client.Preheat(context.Background())
 
     // Call API
-    _, err := client.Im.Chat.CreateTyping(context.Background(), &coim.CreateTypingReq{})
-    fmt.Println(err)
+    resp, err := client.Im.Message.SendMessage(context.Background(), &coim.SendMessageReq{
+        ChatId:      cosdk.String("chat-id"),
+        MessageType: cosdk.String("text"),
+        MessageContent: &coim.MessageContent{
+            Text: &coim.MessageText{
+                Content: cosdk.String("Cored new version released!"),
+            },
+        },
+    })
+    fmt.Println(resp, err)
 }
 ```
 
-## Authentication
+## Configuration
 
-This SDK uses app-level authentication. Pass your App ID and App Secret when creating the client. The SDK automatically manages access token retrieval and refresh.
+`NewClient()` accepts optional functional options to configure client behavior:
 
-## Examples
+```go
+import (
+    "time"
 
-Run all tests:
+    cosdk "github.com/cored-im/openapi-sdk-go"
+    cocore "github.com/cored-im/openapi-sdk-go/core"
+)
 
-```bash
-go test ./...
+client := cosdk.NewClient(
+    "https://your-backend-url.com",
+    "your-app-id",
+    "your-app-secret",
+    cosdk.WithLogLevel(cocore.LoggerLevelDebug), // Log level (default: Info)
+    cosdk.WithRequestTimeout(30 * time.Second),             // Request timeout (default: 60s)
+    cosdk.WithEnableEncryption(false),                      // Enable request encryption (default: true)
+)
 ```
 
-Run the IM message example only:
+## Event Subscription
 
-```bash
-go test ./example -run TestImMessageSend
+Receive real-time events via WebSocket:
+
+```go
+// Register event handler
+client.Im.Message.Event.OnMessageReceive(func(ctx context.Context, event *coim.EventMessageReceive) {
+    fmt.Println("Message received:", event.Body.Message.MessageId)
+})
 ```
+
+## Error Handling
+
+When an API call fails, the returned `error` can be type-asserted to `*cocore.ApiError`, which contains `Code`, `Msg`, and `LogId` fields:
+
+```go
+import cocore "github.com/cored-im/openapi-sdk-go/core"
+
+resp, err := client.Im.Message.SendMessage(ctx, req)
+if err != nil {
+    if apiErr, ok := err.(*cocore.ApiError); ok {
+        fmt.Printf("API error: code=%d, msg=%s, logId=%s\n", apiErr.Code, apiErr.Msg, apiErr.LogId)
+    } else {
+        fmt.Println("Request error:", err)
+    }
+}
+```
+
+## Requirements
+
+- Go 1.12 or later
 
 ## Links
 

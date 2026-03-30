@@ -41,7 +41,7 @@ func main() {
     // 调用 API
     resp, err := client.Im.Message.SendMessage(context.Background(), &coim.SendMessageReq{
         ChatId:      cosdk.String("chat-id"),
-        MessageType: cosdk.String("text"),
+        MessageType: cosdk.String(coim.MessageType_TEXT),
         MessageContent: &coim.MessageContent{
             Text: &coim.MessageText{
                 Content: cosdk.String("Cored 新版本发布！"),

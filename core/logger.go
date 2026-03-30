@@ -39,24 +39,24 @@ type defaultLogger struct {
 
 func (l defaultLogger) Debugf(ctx context.Context, format string, args ...interface{}) {
 	if l.level <= LoggerLevelDebug {
-		l.logger.Printf("[cosdk] DEBUG "+format, args...)
+		l.logger.Printf("[Cored] DEBUG "+format, args...)
 	}
 }
 
 func (l defaultLogger) Infof(ctx context.Context, format string, args ...interface{}) {
 	if l.level <= LoggerLevelInfo {
-		l.logger.Printf("[cosdk] INFO "+format, args...)
+		l.logger.Printf("[Cored] INFO "+format, args...)
 	}
 }
 
 func (l defaultLogger) Warnf(ctx context.Context, format string, args ...interface{}) {
 	if l.level <= LoggerLevelWarn {
-		l.logger.Printf("[cosdk] WARN "+format, args...)
+		l.logger.Printf("[Cored] WARN "+format, args...)
 	}
 }
 
 func (l defaultLogger) Errorf(ctx context.Context, format string, args ...interface{}) {
 	if l.level <= LoggerLevelError {
-		l.logger.Printf("[cosdk] ERROR "+format, args...)
+		l.logger.Printf("[Cored] ERROR "+format, args...)
 	}
 }

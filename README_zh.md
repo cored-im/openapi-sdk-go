@@ -68,7 +68,7 @@ client := cosdk.NewClient(
     "https://your-backend-url.com",
     "your-app-id",
     "your-app-secret",
-    cosdk.WithLogLevel(cocore.LoggerLevelDebug), // 日志级别（默认: Info）
+    cosdk.WithLogLevel(cocore.LoggerLevelDebug),            // 日志级别（默认: Info）
     cosdk.WithRequestTimeout(30 * time.Second),             // 请求超时（默认: 60s）
     cosdk.WithEnableEncryption(false),                      // 启用请求加密（默认: true）
 )
